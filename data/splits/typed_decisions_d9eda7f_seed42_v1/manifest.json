@@ -1,0 +1,95 @@
+{
+  "split_id": "seed42",
+  "seed": 42,
+  "algorithm": "sorted-case-ids; random.Random(str(seed)+\":\"+workflow).shuffle; 240/30/30",
+  "source_manifest": {
+    "dataset": "LocalLLaMA/typed-decisions",
+    "revision": "d9eda7f31ba227333213a1787f2c78fdaa4090c8",
+    "files": [
+      {
+        "file": "agent_trace_observability/train-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/LocalLLaMA/typed-decisions/resolve/d9eda7f31ba227333213a1787f2c78fdaa4090c8/agent_trace_observability/train-00000-of-00001.parquet",
+        "bytes": 157731,
+        "sha256": "e7b2f78fe539517c6a66a90c68ed671c6133194a88d27dbff5d84713af46b901"
+      },
+      {
+        "file": "agent_trace_observability/test-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/LocalLLaMA/typed-decisions/resolve/d9eda7f31ba227333213a1787f2c78fdaa4090c8/agent_trace_observability/test-00000-of-00001.parquet",
+        "bytes": 71362,
+        "sha256": "833ad1364237b9a3fe05be2c62e632f0cb34ba372284b975140d362ab246f70d"
+      },
+      {
+        "file": "customer_service/train-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/LocalLLaMA/typed-decisions/resolve/d9eda7f31ba227333213a1787f2c78fdaa4090c8/customer_service/train-00000-of-00001.parquet",
+        "bytes": 267280,
+        "sha256": "3e3abc2a9307bc641f60a6f9042627897ca01c145c3206211dfa9c926ba8721c"
+      },
+      {
+        "file": "customer_service/test-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/LocalLLaMA/typed-decisions/resolve/d9eda7f31ba227333213a1787f2c78fdaa4090c8/customer_service/test-00000-of-00001.parquet",
+        "bytes": 115037,
+        "sha256": "b4e6e23b3c2add197dda74008f2ce42ff996511ff1bf9c93e8b0e6d84ac9c275"
+      },
+      {
+        "file": "invoice_processing/train-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/LocalLLaMA/typed-decisions/resolve/d9eda7f31ba227333213a1787f2c78fdaa4090c8/invoice_processing/train-00000-of-00001.parquet",
+        "bytes": 177403,
+        "sha256": "6a5cfcd12e77e707cd9861107868a5adbb7df566ced3162bb9472cd3e348a598"
+      },
+      {
+        "file": "invoice_processing/test-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/LocalLLaMA/typed-decisions/resolve/d9eda7f31ba227333213a1787f2c78fdaa4090c8/invoice_processing/test-00000-of-00001.parquet",
+        "bytes": 79603,
+        "sha256": "ce2adfb5201dba910b23bda6ab9678c385b580edaabbf8348b4e024c120d4b75"
+      },
+      {
+        "file": "security_incidents/train-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/LocalLLaMA/typed-decisions/resolve/d9eda7f31ba227333213a1787f2c78fdaa4090c8/security_incidents/train-00000-of-00001.parquet",
+        "bytes": 201079,
+        "sha256": "3aae379ac25fc6434d5f5675f04b06f4310d1aac3056a0e30bb0f779aa2f0a99"
+      },
+      {
+        "file": "security_incidents/test-00000-of-00001.parquet",
+        "url": "https://huggingface.co/datasets/LocalLLaMA/typed-decisions/resolve/d9eda7f31ba227333213a1787f2c78fdaa4090c8/security_incidents/test-00000-of-00001.parquet",
+        "bytes": 87929,
+        "sha256": "4d8bc1879a0b67e5d275edea21a694b06136ca2a2c3355215a7d8adea6b0c75f"
+      }
+    ]
+  },
+  "source_manifest_sha256": "535c331c12e46f4bf400d83ae36bf9062eac0e726eb67637a60bb8da1233294a",
+  "gold_normalization": "divide by original sum; require original sum within 1e-5 of 1",
+  "hard_label_ties": "lexicographically smallest original option identity among exact maxima",
+  "counts": {
+    "train": 960,
+    "dev": 120,
+    "calibration": 120,
+    "test": 400
+  },
+  "by_workflow": {
+    "train": {
+      "agent_trace_observability": 240,
+      "customer_service": 240,
+      "invoice_processing": 240,
+      "security_incidents": 240
+    },
+    "dev": {
+      "agent_trace_observability": 30,
+      "customer_service": 30,
+      "invoice_processing": 30,
+      "security_incidents": 30
+    },
+    "calibration": {
+      "agent_trace_observability": 30,
+      "customer_service": 30,
+      "invoice_processing": 30,
+      "security_incidents": 30
+    },
+    "test": {
+      "agent_trace_observability": 100,
+      "customer_service": 100,
+      "invoice_processing": 100,
+      "security_incidents": 100
+    }
+  },
+  "case_state_sha256": "1162c4f6749d597f3cb8cd306c7afd5d8a2717e136ee701d904cb58c83626a01"
+}

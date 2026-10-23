@@ -1,0 +1,15 @@
+# Baseline reference environment: Conda torch29-cu130, Python 3.13.
+# Select the matching CUDA PyTorch build before installing on another host.
+torch==2.9.0
+transformers==5.14.1
+datasets==5.0.0
+numpy==2.2.6
+PyYAML==6.0.2
+pyarrow>=21
+safetensors>=0.6
+
+# G1 adapter training; FLA is installed separately into project-local .runtime/fla.
+peft==0.19.1
+accelerate==1.13.0
+einops==0.8.2
+

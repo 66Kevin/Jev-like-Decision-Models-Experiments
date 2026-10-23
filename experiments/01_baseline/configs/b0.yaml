@@ -1,0 +1,24 @@
+experiment_id: b0
+seed: 42
+dataset:
+  name: LocalLLaMA/typed-decisions
+  revision: d9eda7f31ba227333213a1787f2c78fdaa4090c8
+  raw_dir: data/raw/typed-decisions/d9eda7f31ba227333213a1787f2c78fdaa4090c8
+  split_dir: data/splits/typed_decisions_d9eda7f_seed42_v1
+model:
+  path: /data/data_cold/Workshop/wangyueyi/llm_modelscope/qwen3.5-0.8b
+  dtype: bfloat16
+  device: cuda:0
+  attention_implementation: sdpa
+  local_files_only: true
+evaluation:
+  splits: [dev, test]
+  max_input_tokens: 8192
+  warmup_cases: 3
+  case_batch_size: 1
+  ece_bins: 15
+  bootstrap_samples: 2000
+  temperature: 1.0
+  use_cache: false
+  prompt_version: b0_v1
+output_root: outputs/01_baseline/b0

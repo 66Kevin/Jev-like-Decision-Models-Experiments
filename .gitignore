@@ -1,0 +1,56 @@
+# Python caches and test/build artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+build/
+dist/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Local Python environments and downloaded dependencies
+/.runtime/
+.venv/
+venv/
+env/
+.conda/
+.cache/
+
+# Downloaded datasets and generated labels; keep data/splits reproducible metadata
+/data/raw/
+/data/teacher_labels/
+
+# Experiment outputs, checkpoints, model weights and training logs
+/outputs/
+/checkpoints/
+/models/
+/wandb/
+/mlruns/
+/runs/
+*.safetensors
+*.pt
+*.pth
+*.ckpt
+*.onnx
+*.gguf
+pytorch_model*.bin
+adapter_model.bin
+events.out.tfevents.*
+*.log
+
+# Local credentials and machine-specific settings
+.env
+.env.*
+!.env.example
+/.aws/
+/.codex/
+/.agents/
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+
