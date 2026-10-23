@@ -4,6 +4,8 @@
 
 输入是业务状态（state）、问题和候选项；输出是每个候选项的概率，以及最终选择。先围绕固定数据集验证效果，再考虑向新问题、新候选项泛化。
 
+---
+
 **当前进度：B0、G1、G2、P0、P1均已完成评估与复核。各训练组完成三个seed的训练、dev选模和test；详见 [G1 报告](reports/02_supervised_g1.md)、[G2 报告](reports/02_supervised_g2.md)、[P0 报告](reports/02_supervised_p0.md) 与 [P1 报告](reports/02_supervised_p1.md)。P2／C1及阶段3～4尚未开展。**
 
 B0 官方 test 结果：**Accuracy 46.30%，NLL 1.3324，ECE15 0.2017**，每 case p50 延迟 330.91 ms。完整分组结果、运行记录和口径说明见 [基线报告](reports/01_baseline.md)；运行命令见 [阶段 1 说明](experiments/01_baseline/README.md)。
@@ -79,17 +81,19 @@ P1 联合训练 Pointer Head 与 LoRA，三 seed Accuracy 为 **76.30% ± 0.58 �
 
 保留已约定的七组编号。其中 B0 来自阶段 1，其余六组属于本轮阶段 2；它们共同构成回答 Q1、Q2 的对照矩阵。
 
-| 编号 | 输出方式 | 训练范围 | 主要对应问题 |
-| --- | --- | --- | --- |
-| B0 | LM Head | 不训练；复用阶段 1 基线 | Q1 的参考起点 |
-| G1 | LM Head | Backbone LoRA；原 LM Head 保持冻结 | Q1、Q2 |
-| G2 | LM Head | 文本模型全量微调 | Q1：与 G1 比较 |
-| P0 | Pointer Head | 冻结 Backbone，只训练新 Head | Q1：冻结表示是否够用 |
-| **P1** | **Pointer Head** | **新 Head + Backbone LoRA** | **Q1、Q2；推荐主方案** |
-| P2 | Pointer Head | 新 Head + 文本 Backbone 全量微调 | Q1：与 P1 比较 |
-| C1 | Candidate Head | 新 Head + Backbone LoRA | Q2：与 G1、P1 比较 |
+| 编号 | 输出方式 | 训练范围 | 主要对应问题 | 参考项目与借鉴内容 |
+| --- | --- | --- | --- | --- |
+| B0 | LM Head | 不训练；复用阶段 1 基线 | Q1 的参考起点 | 通用 LM-token 判别读出；本项目的原始模型对照 |
+| G1 | LM Head | Backbone LoRA；原 LM Head 保持冻结 | Q1、Q2 | [JevAny](https://github.com/SimpleJev/JevAny)：候选标签 token 的 logits 读出 + LoRA 适配 |
+| G2 | LM Head | 文本模型全量微调 | Q1：与 G1 比较 | 沿用 G1 的 LM-token 读出路线；本项目扩展为 Full FT 对照 |
+| P0 | Pointer Head | 冻结 Backbone，只训练新 Head | Q1：冻结表示是否够用 | [Kev](https://github.com/jaredpalmer/kev)：决策位置与候选位置的表示匹配；本项目扩展为 Head Only 对照 |
+| **P1** | **Pointer Head** | **新 Head + Backbone LoRA** | **Q1、Q2；推荐主方案** | [Kev](https://github.com/jaredpalmer/kev)：Pointer Head 与 Backbone LoRA 联合训练 |
+| P2 | Pointer Head | 新 Head + 文本 Backbone 全量微调 | Q1：与 P1 比较 | [Kev](https://github.com/jaredpalmer/kev)：Pointer 读出思路；本项目设置 Full FT 对照 |
+| C1 | Candidate Head | 新 Head + Backbone LoRA | Q2：与 G1、P1 比较 | [AgentJev](https://github.com/malevrigns/agent-jev)：独立候选编码 + 无位置编码的集合 Transformer + 残差共享打分 |
 
 这里的 Full FT 指文本路径的全量训练，本轮不涉及视觉任务。所有可训练专用 Head 都接受监督训练。
+
+参考项目列记录本实验借鉴的具体部分，不表示项目只支持该路线，也不表示完整复现。各组采用本仓库统一的数据划分与评估协议；输入、Head 和训练配方的差异另行记录。
 
 #### 如何解读对照
 
